@@ -21,5 +21,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD}}
       
       - name: build
-        run: docker build -t jdllz/satc-develop:0.0.1
+        run: docker build -t jdllz/satc-develop:0.0.1 .
       
