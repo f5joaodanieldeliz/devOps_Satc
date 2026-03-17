@@ -19,3 +19,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME}}
           password: ${{ secrets.DOCKER_PASSWORD}}
+      
+      - name: build
+        run: docker build -T jdllz/satc-develop:0.0.1
+      
