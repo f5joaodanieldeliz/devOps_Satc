@@ -1,9 +1,9 @@
 name: Deploy para GKE
 
 on:
-  workflow_run:
-    workflows: ['Build']
-    types: [completed]
+  workflow_call:
+  push:
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
