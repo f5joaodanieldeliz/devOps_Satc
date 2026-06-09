@@ -6,5 +6,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     https: false
+  },
+  preview: {
+    host: true,
+    allowedHosts: ["jdllz.app.devops-satc.online"]
   }
 })
