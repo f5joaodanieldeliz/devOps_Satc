@@ -1,45 +1,73 @@
-DevOps é uma cultura e conjunto de práticas que unem Desenvolvimento (Dev) e Operações (Ops).
-Obijetivo:Entregar software mais rápido, com qualidade e de forma contínua.
+# React + TypeScript + Vite
 
-Como funciona na pratica:
-Integração Contínua (CI)
-Entrega/Deploy Contínuo (CD)
-Automação de testes
-Infraestrutura como código
-Monitoramento constante
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-O que faz um profissional de devOps: 
-Automatiza processos de build e deploy
-Configura pipelines (ex: CI/CD)
-Gerencia infraestrutura em nuvem
-Garante que ambientes (dev, homologação, produção) funcionem bem
-É mais sobre cultura, colaboração e automação do que apenas um cargo específico
+Currently, two official plugins are available:
 
-SRE é uma prática criada pelo Google que aplica engenharia de software aos problemas de operações e confiabilidade
-Obijetivo: Garantir que sistemas sejam altamente confiáveis, escaláveis e estáveis.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Foco principal:
-Disponibilidade (uptime)
-Performance
-Monitoramento avançado
-Gestão de incidentes
-Definição de SLIs, SLOs e SLAs
+## React Compiler
 
- O que faz um SRE?
-Cria sistemas para evitar falhas
-Define métricas de confiabilidade
-Atua fortemente em incidentes críticos
-Automatiza tarefas operacionais
-Equilibra velocidade de entrega vs estabilidade
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-| DevOps                 | SRE                                              |
-| ---------------------- | ------------------------------------------------ |
-| Cultura e práticas     | Implementação prática com foco em confiabilidade |
-| Foco em entrega rápida | Foco em estabilidade e disponibilidade           |
-| Mais amplo             | Mais especializado                               |
+## Expanding the ESLint configuration
 
-Uma forma simples de entender:
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-DevOps → “Vamos entregar mais rápido e melhor.”
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-SRE → “Vamos garantir que isso não quebre.”
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
