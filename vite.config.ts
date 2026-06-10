@@ -9,6 +9,6 @@ export default defineConfig({
   },
   preview: {
     host: true,
-    allowedHosts: ["jdllz.app.devops-satc.online"]
+    allowedHosts: ["jdllz.app.devops-satc.online", "jdllz.app.devops-satc.online"]
   }
 })
