@@ -5,10 +5,11 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    https: false
+    allowedHosts: ["jdllz.app.devops-satc.online"],
   },
   preview: {
     host: true,
     allowedHosts: ["jdllz.app.devops-satc.online", "jdllz.app.devops-satc.online"]
   }
+  
 })
